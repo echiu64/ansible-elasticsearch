@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - include: '../tasks/main.yml'
+  handlers:
+    - include: '../handlers/main.yml'
+  vars_files:
+    - '../defaults/main.yml'
+    - '../.travis.yml'
+  vars:
+    - elasticsearch_version: 1.5.2
+    - elasticsearch_java_home: /usr/java/latest
+    - elasticsearch_http_port: 8443
+    - elasticsearch_plugins:
+      - name: "elasticsearch/marvel/latest"

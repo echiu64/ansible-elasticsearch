@@ -1,0 +1,22 @@
+---
+
+dependencies: []
+
+galaxy_info:
+  author: echiu64
+  description: ElasticSearch role for ansible (managed installation and configuration) support CentOS mainly
+  license: Apache
+  min_ansible_version: 1.6
+  platforms:
+  - name: Amazon Linux AMI
+    versions:
+    - 2014.09
+    - 2015.03
+  - name: CentOS
+    versions:
+    - 6
+    - 7
+  categories:
+  - cloud
+  - development
+  - database:nosql

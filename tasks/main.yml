@@ -1,0 +1,10 @@
+---
+
+- include: install.yml
+- include: limits.yml
+- include: plugins.yml
+
+- service: name=elasticsearch enabled=yes runlevel=2345
+  sudo: yes
+
+#- include: proxy.yml

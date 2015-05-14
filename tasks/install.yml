@@ -1,0 +1,32 @@
+---
+
+- name: install | Install JDK
+  yum: name=java-1.7.0-openjdk state=latest
+  sudo: yes
+ 
+- name: install | Add ElasticSearch GPG key
+  rpm_key: state=present key=https://packages.elastic.co/GPG-KEY-elasticsearch 
+  sudo: yes
+
+- name: install | Add ElasticSearch yum repo
+  template: src=elasticsearch.repo.j2 dest=/etc/yum.repos.d/elasticsearch.repo owner=root group=root mode=0600
+  sudo: yes
+
+- name: install | Install ElasticSearch from yum
+  yum: name=elasticsearch{% if elasticsearch_version != "latest" %}-{{elasticsearch_version}}{% endif %} state=latest
+  sudo: yes
+
+- name: configure | Configure ElasticSearch configuration file
+  template: src=elasticsearch.yml.j2 dest={{elasticsearch_confdir}}/elasticsearch.yml owner=root group={{elasticsearch_group}} mode=0644
+  sudo: yes
+
+- name: configure | Configure ElasticSearch logging file
+  template: src=logging.yml.j2 dest={{elasticsearch_confdir}}/logging.yml owner=root group={{elasticsearch_group}} mode=0644
+  sudo: yes
+
+- name: configure | Configure ElasticSearch startup configuration
+  template: src=elasticsearch.j2 dest=/etc/sysconfig/elasticsearch owner=root group={{elasticsearch_group}} mode=0644
+  sudo: yes
+  notify: 
+    - restart elasticsearch
+
