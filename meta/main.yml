@@ -8,11 +8,11 @@ galaxy_info:
   license: Apache
   min_ansible_version: 1.6
   platforms:
-  - name: Amazon Linux AMI
+  - name: Amazon
     versions:
     - 2014.09
     - 2015.03
-  - name: CentOS
+  - name: EL
     versions:
     - 6
     - 7
